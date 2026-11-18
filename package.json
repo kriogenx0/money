@@ -1,0 +1,32 @@
+{
+  "name": "money",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.2.0",
+    "jose": "^6.2.17",
+    "next": "15.5.29",
+    "plaid": "^51.0.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-plaid-link": "^5.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.29",
+    "typescript": "^5",
+    "vitest": "^5.1.1"
+  }
+}
