@@ -41,13 +41,13 @@ In Plaid sandbox, connect "First Platypus Bank" (or any bank) with `user_good` /
 | `SESSION_SECRET` | Signs the login cookie. Any long random string. |
 | `PLAID_CLIENT_ID`, `PLAID_SECRET` | From the Plaid dashboard. |
 | `PLAID_ENV` | `sandbox` or `production`. |
-| `PUBLIC_URL` | e.g. `https://money.homecloud.one`; the webhook URL is built from it. |
+| `PUBLIC_URL` | e.g. `https://money.kriogenx.com`; the webhook URL is built from it. |
 | `DATA_DIR` | Folder for the SQLite database. `/data` in Docker. |
 
 ## Deploying
 
 The `Dockerfile` builds a standalone Next.js server on port 3000 and keeps the SQLite database in `/data`.
-Mount a persistent volume there. It is deployed with Coolify at https://money.homecloud.one.
+Mount a persistent volume there. It is deployed with Coolify at https://money.kriogenx.com.
 
 Changing a webhook URL only affects banks connected afterwards; existing connections keep the URL they were
 created with.
