@@ -33,7 +33,7 @@ export function getPlaid(): PlaidApi {
   return client;
 }
 
-/** Public URL Plaid should call for webhooks, e.g. https://money.homecloud.one/api/plaid/webhook */
+/** Public URL Plaid should call for webhooks, e.g. https://money.kriogenx.com/api/plaid/webhook */
 export function webhookUrl(): string | undefined {
   const base = process.env.PUBLIC_URL;
   return base ? `${base.replace(/\/$/, "")}/api/plaid/webhook` : undefined;
