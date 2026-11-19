@@ -8,11 +8,13 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
-        <Nav />
+        <Nav signOutUrl={process.env.AUTH_MODE === "proxy" ? process.env.SIGN_OUT_URL || null : null} />
         <main>{children}</main>
       </body>
     </html>

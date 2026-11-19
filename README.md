@@ -28,7 +28,11 @@ npm run dev                  # http://localhost:3000
 npm test
 ```
 
-Without `APP_PASSWORD` the app is open locally. In production it refuses to serve until a password is set.
+In production, money.kriogenx.com sits behind the Home Cloud sign-in (Authelia, set up in
+perfect-ink/home-cloud `vps/auth`) with `AUTH_MODE=proxy`: the app then requires the `Remote-User`
+header Traefik adds after sign-in, and only `/api/plaid/webhook` and `/api/health` are open.
+
+Without `AUTH_MODE=proxy` the app uses its own `APP_PASSWORD` login. Without `APP_PASSWORD` the app is open locally. In production it refuses to serve until a password is set.
 
 In Plaid sandbox, connect "First Platypus Bank" (or any bank) with `user_good` / `pass_good`.
 `user_transactions_dynamic` gives transactions that change over time and fire webhooks.
@@ -37,7 +41,9 @@ In Plaid sandbox, connect "First Platypus Bank" (or any bank) with `user_good` /
 
 | Variable | Purpose |
 | --- | --- |
-| `APP_PASSWORD` | Password for the web UI. Required in production. |
+| `AUTH_MODE` | `proxy` to rely on the Home Cloud sign-in instead of the app's own password. |
+| `SIGN_OUT_URL` | With `AUTH_MODE=proxy`, where "Sign out" goes (`https://auth.kriogenx.com/logout`). |
+| `APP_PASSWORD` | Password for the app's own login, when not behind the shared sign-in. |
 | `SESSION_SECRET` | Signs the login cookie. Any long random string. |
 | `PLAID_CLIENT_ID`, `PLAID_SECRET` | From the Plaid dashboard. |
 | `PLAID_ENV` | `sandbox` or `production`. |

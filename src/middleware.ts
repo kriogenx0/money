@@ -8,6 +8,16 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   if (PUBLIC_PATHS.some((p) => pathname === p)) return NextResponse.next();
 
+  // AUTH_MODE=proxy: the Home Cloud sign-in (Authelia forward auth in Traefik) sits in front
+  // and sets Remote-User on every request it lets through. Traefik overwrites any client-sent
+  // Remote-User, so its absence means the request didn't come through the sign-in.
+  if (process.env.AUTH_MODE === "proxy") {
+    if (req.headers.get("remote-user")) return NextResponse.next();
+    return pathname.startsWith("/api/")
+      ? NextResponse.json({ error: "Not signed in" }, { status: 401 })
+      : new NextResponse("Sign in through the Home Cloud sign-in.", { status: 401 });
+  }
+
   if (!authEnabled()) {
     // Refuse to serve financial data publicly without a password in production.
     if (process.env.NODE_ENV === "production") {
